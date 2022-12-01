@@ -9,6 +9,7 @@ const {readdirSync} = require('fs')
 
 
 //middlewares
+//app to set route and application set 
 
 app.use(helmet())
 app.use(express.static('public'));
@@ -19,14 +20,18 @@ app.use(cors());
 
 //DB connection
 
-mongoose //object 
-.connect(process.env.DATABASE)
+mongoose
+.connect("mongodb://127.0.0.1:27017/ostadb2")
 .then(() => console.log("DB connected"))
 .catch(err => console.log("DB Error => ", err));
 
-//routes middleware
-//readdirSync
+console.log (process.env.DATABASE)
 
+//routes middleware
+// readdirSync("./routes").map(r => app.use("/api/v1", requier(`./routes/${r}`)))
+app.get('/', (req, res) => {
+    res.send('Aleya Aly!')
+  })
 //server
 const port = process.env.PORT || 8000;
 
